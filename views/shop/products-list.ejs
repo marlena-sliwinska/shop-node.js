@@ -1,12 +1,38 @@
 <%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/product.css"/>
 </head>
 
-<body class='wrapper'>
+<body >
 
   <%- include ('../includes/navigation.ejs') %>
+    <main>
+      <h1>Products list</h1>
+      <% if (products.length > 0) { %>
+        <section class="products">
+            <% for (let product of products) { %>
+                <article class="card product-item">
+                    <header class="card__header">
+                        <h2 class="product__title"><%= product.name %></h2>
+                    </header>
+                    <div class="card__image">
+                        <img src="https://plus.unsplash.com/premium_photo-1693679741548-861a73111582?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60"
+                            alt="Photo of product">
+                    </div>
+                    <div class="card__content">
+                        <h3 class="product__price">$19.99</h3>
+                        <p class="product__description">A very interesting book about so many even more interesting things!</p>
+                    </div>
+                    <div class="card__actions">
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                </article>
+            <% } %>
+        </div>
+    <% } else { %>
+        <h2>Nothing here!</h2>
+    <% } %>
 
-  <h1>Products list!</h1>
-    <main></main>
+    </main>
     <footer></footer>
 
    
