@@ -1,0 +1,21 @@
+.header {
+    background-color: "#1c4617";
+    color: #eeeeee;
+    line-height: 40px;
+    background-color: #282828;
+    position: relative;
+    font-size: 1rem;
+  }
+  
+  .header ul.navigation {
+    display: "flex";
+  }
+  
+  
+  .header li.navigation-item {
+    padding-right: 5rem;
+  }
+
+  a.active {
+    color: 
+  }
