@@ -37,8 +37,11 @@ const saveProductInFile = (product) => {
 }
 
 class Product {
-  constructor(productName) {
+  constructor(productName, imageUrl, description, price) {
     this.name = productName;
+    this.url = imageUrl
+    this.description = description
+    this.price = price
   }
   save() {
     saveProductInFile(this)

@@ -16,7 +16,7 @@ const shopRoutes = require('./routes/shop')
 
 const notFundController = require("./controllers/404");
 
-app.use(adminRoutes)
+app.use('/admin',adminRoutes)
 app.use(shopRoutes)
 
 app.use(notFundController.get404);
