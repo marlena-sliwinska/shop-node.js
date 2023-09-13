@@ -2,16 +2,16 @@
 </head>
 <body >
   <%- include ('../includes/navigation.ejs') %>
-    <main>
+    <main class="centered">
         <h1><%= product.name %></h1>
         <hr/>
-        <div class="card__image">
+        <div class="product_detail">
             <img src="<%= product.url %>"
                 alt=<%= product.name %>
         </div>
         <h2>$ <%= product.price %></h2>
         <p><%= product.description %></p>
-        <%- include ('../includes/add-to-cart.ejs', {product: prooduct}) %>
+        <%- include ('../includes/add-to-cart.ejs', {product: product}) %>
     </main>
     <footer></footer>
 
