@@ -13,7 +13,7 @@ const productsPath = path.join(
 const getProductsFromFile = (callback) => {
   fs.readFile(productsPath, (err, fileContent) => {
     if (err) {
-      console.log(`Error while reading path ${path}`);
+      console.log(`Error while reading path ${productsPath}`);
       return;
     }
     let products = [];
