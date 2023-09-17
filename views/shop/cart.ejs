@@ -1,4 +1,5 @@
 <%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/product.css"/>
 </head>
 
 <body >
@@ -6,7 +7,34 @@
   <%- include ('../includes/navigation.ejs') %>
     <main>
       <h1>My cart</h1>
-
+      <% if (products.length > 0) { %>
+        <h3>Total price <%= price %></h3>
+        <section class="products">
+            <% for (let product of products) { %>
+                <article class="card product-item">
+                    <header class="card__header">
+                        <h2 class="product__title"><%= product.productData.name %></h2>
+                    </header>
+                    <div class="card__image">
+                        <img src=<%= product.productData.url %>
+                            alt="Photo of product">
+                    </div>
+                    <div class="card__content">
+                        <h3 class="product__price">$<%= product.productData.price %></h3>
+                        <p class="product__description">quantity: <%= product.quantity %></p>
+                    </div>
+                    <div class="card__actions">
+                      <form action="/cart-delete" method="POST" >
+                        <button class="btn" type="submit">Delete</button>
+                        <input type="hidden" name="productId" value="<%= product.productData.id %>">
+                    </form>
+                    </div>
+                </article>
+            <% } %>
+        </div>
+    <% } else { %>
+        <h2>Nothing here!</h2>
+    <% } %>
 
     </main>
     <footer></footer>

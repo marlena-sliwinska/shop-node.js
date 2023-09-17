@@ -28,26 +28,51 @@ const getProductsFromFile = (callback) => {
 
 const saveProductInFile = (product) => {
   getProductsFromFile((products) => {
-    products.push(product);
-    fs.writeFile(productsPath, JSON.stringify(products), (err) => {
-      if (err) {
-        console.log(`Something went wrong during saving... ${err}`);
-      }
-    });
+    if(product.id) {
+      const existingProductIndex = products.findIndex(prod=>prod.id===product.id)
+      const updatedProducts = [...products]
+      products[existingProductIndex] = [product]
+      updatedProducts[existingProductIndex] = product
+      fs.writeFile(productsPath, JSON.stringify(updatedProducts), (err) => {
+        if (err) {
+          console.log(`Something went wrong during saving... ${err}`);
+        }
+      });
+    } else {
+      product.id = uuidv4();
+      products.push(product);
+      fs.writeFile(productsPath, JSON.stringify(products), (err) => {
+        if (err) {
+          console.log(`Something went wrong during saving... ${err}`);
+        }
+      });
+    }
   });
 };
 
 class Product {
-  constructor(productName, imageUrl, description, price) {
+  constructor(id, productName, imageUrl, description, price) {
+    this.id = id
     this.name = productName;
     this.url = imageUrl;
     this.description = description;
     this.price = price;
   }
   save() {
-    this.id = uuidv4();
     saveProductInFile(this);
   }
+  static delete(id) {
+    getProductsFromFile((products) => {
+      const updatedProducts = products.filter(product=>product.id!==id)
+      console.log('updatedProducts',updatedProducts)
+      fs.writeFile(productsPath, JSON.stringify(updatedProducts), (err) => {
+        if (err) {
+          console.log(`Something went wrong during saving... ${err}`);
+        }
+      });
+      });
+  }
+
   static fetchProductbyId(id, cb) {
     getProductsFromFile((products) => {
       const product = products.find((product) => product.id === id);

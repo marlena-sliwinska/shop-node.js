@@ -12,5 +12,6 @@ router.get('/products', shopControllers.getAllProducts)
 router.get('/products/:productId', shopControllers.getProduct)
 router.get('/cart', shopControllers.getCart)
 router.post('/cart', shopControllers.postProductToCart)
+router.post('/cart-delete', shopControllers.cartdeleteItem)
 
 module.exports = router
