@@ -1,29 +1,34 @@
-const db = require('../utils/database');
+const Sequelize = require('sequelize'); // class or constructor function - capital letter
 
-class Product {
-  constructor(id, productName, imageUrl, description, price) {
-    this.id = id;
-    this.name = productName;
-    this.url = imageUrl;
-    this.description = description;
-    this.price = price;
-  }
-  save() {
-    // sql injection issue - safety
-    return db.execute(
-      'INSERT INTO products (name, price, url, description) VALUES (?, ?, ?, ?)',
-      [this.name, this.price, this.url, this.description]
-    );
-  }
-  static delete(id) {}
+// sequalize - an Object Relational Mapping Library
 
-  static fetchProductbyId(id) {
-    return db.execute('SELECT * FROM products WHERE products.id=?', [id]);
-  }
+const sequelize = require('../utils/database');
+/*
+fully configured sequelize environment which does also have 
+the connection pool but also all the features of the sequelize
+package
+*/
 
-  static fetchAll() {
-    return db.execute('SELECT * FROM products');
-  }
-}
+const Product = sequelize.define('product', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNUll: false,
+    primaryKey: true,
+  },
+  name: Sequelize.STRING,
+  price: {
+    type: Sequelize.DOUBLE,
+    allowNUll: false,
+  },
+  url: {
+    type: Sequelize.STRING,
+    allowNUll: false,
+  },
+  description: {
+    type: Sequelize.STRING,
+    allowNUll: false,
+  },
+});
 
 module.exports = Product;
